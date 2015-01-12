@@ -1,2 +1,2 @@
 # API-Client
-Basic 
+Basic class for connecting to the Content Runner API.
