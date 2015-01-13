@@ -1,9 +1,8 @@
-# Content Runner API client
 Basic starter class for connecting to the Content Runner API. For more information on accepted request headers, possible response headers, and status codes, refer to the [official documentation](https://api.contentrunner.com/apigility/documentation/ContentRunner-v1).
 
-## Usage
+# Usage
 
-### Setup
+## Setup
 
 Before query the Content Runner API, you will need to add your API credentials. You can find your credentials [here](https://www.contentrunner.com/account/api) (if you haven't already, you will need to click the button to generate the credentials initially).
 
@@ -20,7 +19,7 @@ Once your credentials are set, you're ready to instantiate your API object.
 $api = new ContentRunnerApi();
 ```
 
-### Post a new order
+## Post a new order
 
 To create a new order, you will need to create an array with the following order data:
 
@@ -89,11 +88,11 @@ try {
 }
 ```
 
-### Retrieve article details
+## Retrieve article details
 
 You can retrieve the details of your articles either individually or in bulk.
 
-#### Bulk article retrieval
+### Bulk article retrieval
 
 When querying for articles in bulk, you can either retrieve all articles associated with your account or filter them by status and/or order number by passing an optional `$filters` argument.
 
@@ -103,7 +102,11 @@ $filters = array(
     'order_no' => 2952
 );
 
-$articles = $api->get_article_details($filters);
+try {
+    $articles = $api->get_article_details($filters);
+} catch(Exception $e) {
+    die($e->getMessage());
+}
 ```
 
 If the article retrieval was successful, an array will be returned in the following format:
@@ -170,12 +173,16 @@ $results = array(
     )
 );
 ```
-#### Individual article retrieval
+### Individual article retrieval
 
 When querying individual article details, you will pass the article ID as the filter and pass `true` as the second argument to indicate that it is a single article lookup.
 
 ```php
-$article = $api->get_article_details(1433, true);
+try {
+    $article = $api->get_article_details(1433, true);
+} catch(Exception $e) {
+    die($e->getMessage());
+}
 ```
 
 If the article retrieval was successful, an array will be returned in the following format:
